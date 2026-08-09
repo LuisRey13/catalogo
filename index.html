@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koala Kids — Catálogo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="scene">
+
+  <div class="top-actions">
+    <button class="search-toggle" id="searchToggle" hidden aria-label="Buscar en el catálogo">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span>Buscar</span>
+    </button>
+  </div>
+
+  <main class="stage" id="stage">
+
+    <section class="empty-state" id="emptyState">
+      <div class="loading-ring"></div>
+    </section>
+
+    <section class="book" id="book" hidden>
+      <div class="page-edges page-edges--left" id="edgeLeft" aria-hidden="true"></div>
+      <div class="page-edges page-edges--right" id="edgeRight" aria-hidden="true"></div>
+
+      <div class="page-viewport" id="pageViewport">
+        <canvas class="layer layer--under" id="canvasBottom"></canvas>
+
+        <div class="page-flip" id="pageFlip">
+          <canvas class="layer" id="canvasTop"></canvas>
+          <div class="flip-shade" id="flipShade"></div>
+        </div>
+
+        <div class="watermark-layer" aria-hidden="true"></div>
+
+        <button class="hit-zone hit-left" id="hitLeft" aria-label="Página anterior">
+          <span class="hit-chevron">‹</span>
+        </button>
+        <button class="hit-zone hit-right" id="hitRight" aria-label="Página siguiente">
+          <span class="hit-chevron">›</span>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="controls" id="controls" hidden>
+    <button class="nav-btn" id="prevBtn" aria-label="Página anterior">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+
+    <div class="dial" id="dial">
+      <button class="dial-face" id="dialFace" aria-expanded="false">
+        <span class="dial-screw dial-screw--tl"></span>
+        <span class="dial-screw dial-screw--tr"></span>
+        <span class="dial-screw dial-screw--bl"></span>
+        <span class="dial-screw dial-screw--br"></span>
+        <span class="dial-current" id="pageIndicator">1</span>
+        <span class="dial-sep">/</span>
+        <span class="dial-total" id="pageTotal">1</span>
+      </button>
+
+      <div class="dial-panel" id="dialPanel" hidden>
+        <label class="dial-label" for="pageSlider">Ir a la página</label>
+        <input type="range" id="pageSlider" min="1" max="1" value="1">
+        <div class="dial-panel-row">
+          <input type="number" id="pageInput" min="1" max="1" value="1">
+          <button id="goBtn">Ir</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="nav-btn" id="nextBtn" aria-label="Página siguiente">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </nav>
+
+</div>
+
+<!-- Fichero / buscador -->
+<div class="catalog-drawer" id="catalogDrawer" hidden>
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <div class="drawer-panel">
+    <div class="drawer-head">
+      <span class="drawer-label">Fichero del catálogo</span>
+      <button class="drawer-close" id="drawerClose" aria-label="Cerrar buscador">✕</button>
+    </div>
+    <div class="drawer-search">
+      <input type="text" id="searchInput" placeholder="Busca un vestido, falda, accesorio…" autocomplete="off">
+    </div>
+    <div class="drawer-chips" id="drawerChips"></div>
+    <div class="drawer-price-label">Precio</div>
+    <div class="drawer-price-range">
+      <input type="number" id="priceMin" placeholder="Desde" min="0" inputmode="numeric">
+      <span class="price-range-sep">–</span>
+      <input type="number" id="priceMax" placeholder="Hasta" min="0" inputmode="numeric">
+    </div>
+    <div class="drawer-results" id="drawerResults"></div>
+  </div>
+</div>
+
+<!-- Best-effort: se difumina si la ventana pierde el foco -->
+<div class="privacy-overlay">Contenido oculto mientras la ventana no está activa</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="pdf-data.js"></script>
+<script src="catalog-data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
