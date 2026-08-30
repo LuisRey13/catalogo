@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Koala Kids · Catálogo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yellowtail&family=Poppins:wght@400;500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Decoración de fondo -->
+  <div class="bg-deco" aria-hidden="true">
+    <svg class="blob blob-a" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path fill="currentColor" d="M45.3,-58.3C58.6,-49.4,69.4,-35.6,73.6,-19.9C77.8,-4.2,75.4,13.4,67.5,27.9C59.6,42.4,46.2,53.8,31.1,61.2C16,68.6,-0.8,72,-17.5,69.1C-34.2,66.2,-50.8,57,-61.4,43.1C-72,29.2,-76.6,10.6,-73.8,-6.4C-71,-23.4,-60.8,-38.8,-47.4,-48C-34,-57.2,-17,-60.2,0.6,-61C18.2,-61.8,32,-67.2,45.3,-58.3Z" transform="translate(100 100)"/>
+    </svg>
+    <svg class="blob blob-b" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path fill="currentColor" d="M39.6,-51.2C50.9,-42.8,59.4,-30.2,63.8,-15.9C68.2,-1.6,68.5,14.4,62.3,27.7C56.1,41,43.4,51.6,29.1,58.1C14.8,64.6,-1.1,67,-16.9,64C-32.7,61,-48.4,52.6,-58.6,39.5C-68.8,26.4,-73.5,8.6,-70.6,-7.5C-67.7,-23.6,-57.2,-38,-44,-46.6C-30.8,-55.2,-15.4,-58,-0.1,-57.8C15.2,-57.6,28.3,-59.6,39.6,-51.2Z" transform="translate(100 100)"/>
+    </svg>
+    <svg class="ring" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="86" fill="none" stroke="currentColor" stroke-width="14"/>
+    </svg>
+    <div class="dots dots-a"></div>
+    <div class="dots dots-b"></div>
+  </div>
+
+  <!-- Barra superior -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">🐨</span>
+      <span class="brand-name">Koala Kids</span>
+    </div>
+    <button class="btn-search" id="openSearchBtn" type="button">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+        <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <span>Buscar productos</span>
+    </button>
+  </header>
+
+  <!-- Escenario del libro -->
+  <main class="stage">
+    <div class="book-row">
+      <button class="nav-arrow" id="prevBtn" type="button" aria-label="Página anterior">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="book-stage" id="bookStage">
+        <div class="book" id="book">
+          <div class="book-loading" id="bookLoading">
+            <div class="spinner" aria-hidden="true"></div>
+            <p id="loadingText">Cargando catálogo…</p>
+          </div>
+        </div>
+        <div class="click-zone click-zone-left" id="clickLeft" aria-hidden="true"></div>
+        <div class="click-zone click-zone-right" id="clickRight" aria-hidden="true"></div>
+      </div>
+
+      <button class="nav-arrow" id="nextBtn" type="button" aria-label="Página siguiente">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="pillbar">
+      <button class="pill-btn" id="pillPrev" type="button" aria-label="Página anterior">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="pill-page">
+        <input type="text" id="pageInput" inputmode="numeric" autocomplete="off" value="1" aria-label="Página actual">
+        <span class="pill-of">de <span id="pageTotal">–</span></span>
+      </div>
+      <button class="pill-btn" id="pillNext" type="button" aria-label="Página siguiente">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </main>
+
+  <!-- Buscador de productos -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-head">
+      <h2>Buscar productos</h2>
+      <button class="drawer-close" id="drawerClose" type="button" aria-label="Cerrar buscador">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="drawer-body">
+      <div class="field">
+        <label class="field-label" for="searchInput">Nombre del producto</label>
+        <input type="text" id="searchInput" placeholder="Ej. vestido de Jalisco" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="categorySelect">Categoría</label>
+        <select id="categorySelect">
+          <option value="">Todas las categorías</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Rango de precio</label>
+        <div class="price-inputs">
+          <div class="price-input-wrap">
+            <span>$</span>
+            <input type="text" id="priceMinInput" inputmode="numeric" autocomplete="off">
+          </div>
+          <span class="price-sep">–</span>
+          <div class="price-input-wrap">
+            <span>$</span>
+            <input type="text" id="priceMaxInput" inputmode="numeric" autocomplete="off">
+          </div>
+        </div>
+        <div class="range-slider">
+          <div class="range-track"></div>
+          <div class="range-fill" id="rangeFill"></div>
+          <input type="range" id="rangeMin" min="0" max="3000" step="5" value="0">
+          <input type="range" id="rangeMax" min="0" max="3000" step="5" value="3000">
+        </div>
+      </div>
+
+      <button class="btn-clear" id="clearFiltersBtn" type="button">Limpiar filtros</button>
+
+      <div class="results-head">
+        <span id="resultsCount">0 productos</span>
+      </div>
+      <div class="results-list" id="resultsList"></div>
+    </div>
+  </aside>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
